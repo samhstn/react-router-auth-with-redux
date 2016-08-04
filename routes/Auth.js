@@ -1,6 +1,5 @@
 export default (nextState, replace, next) => {
   const state = nextState.location.state;
-  console.log(state);
   if (state) {
     auth(state.credentials)
       .then(() => next())

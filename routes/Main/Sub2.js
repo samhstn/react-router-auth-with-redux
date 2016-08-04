@@ -1,13 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Sub2 extends Component {
-  render () {
-    return (
-      <div>
-        <h5>Sub Component 2</h5>
-      </div>
-    );
-  }
-}
+const Sub2 = () => <h5>Sub Component 2</h5>;
 
 export default Sub2;

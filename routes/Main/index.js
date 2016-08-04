@@ -1,14 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 
-class Main extends Component {
-  render () {
-    return (
-      <div>
-        <h3>Navbar Here</h3>
-        {this.props.children}
-      </div>
-    );
-  }
-}
+const Main = ({ children }) =>
+  <div>
+    <h3>Navbar Here</h3>
+
+    {children}
+
+  </div>;
 
 export default Main;
