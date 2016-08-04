@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { connect } from 'react-redux';
-
-import { setUser, setPass } from '../../actions/index.js';
 
 class Login extends Component {
   constructor () {
     super();
-    this.submitAction = this.submitAction.bind(this);
+    this.loginSubmitAction = this.loginSubmitAction.bind(this);
   }
 
-  submitAction (e, login) {
+  loginSubmitAction (e) {
     e.preventDefault();
+    const user = e.target.querySelector('input[type=text]').value;
+    const pass = e.target.querySelector('input[type=password]').value;
     this.props.router.push({
       pathname: '/main/sub1',
       state: {
-        credentials: login
+        credentials: {user, pass}
       }
     });
   }
@@ -24,9 +23,10 @@ class Login extends Component {
     return (
       <div>
         <h1>Login Page</h1>
-        <form onSubmit={(e) => {this.submitAction(e, this.props.login);}}>
-          <span>Username:</span><input type='text' onChange={this.props.setUser} required />
-          <span>Password:</span><input type='password' onChange={this.props.setPass} required />
+        <form onSubmit={(e) => {this.loginSubmitAction(e);}}>
+          <span>Username:</span>
+          <input type='text' required />
+          <span>Password:</span><input type='password' required />
           <button type='submit'>Submit</button>
         </form>
         {!this.props.children || this.props.children}
@@ -35,10 +35,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    login: state.login
-  };
-};
-
-export default connect(mapStateToProps, { setUser, setPass })(withRouter(Login));
+export default withRouter(Login);
