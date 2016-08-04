@@ -1,38 +1,37 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { withRouter } from 'react-router';
 
-class Login extends Component {
-  constructor () {
-    super();
-    this.loginSubmitAction = this.loginSubmitAction.bind(this);
-  }
+const Login = ({ router, children }) => {
+  let u, p;
 
-  loginSubmitAction (e) {
-    e.preventDefault();
-    const user = e.target.querySelector('input[type=text]').value;
-    const pass = e.target.querySelector('input[type=password]').value;
-    this.props.router.push({
-      pathname: '/main/sub1',
-      state: {
-        credentials: {user, pass}
-      }
-    });
-  }
-
-  render () {
-    return (
-      <div>
-        <h1>Login Page</h1>
-        <form onSubmit={(e) => {this.loginSubmitAction(e);}}>
-          <span>Username:</span>
-          <input type='text' required />
-          <span>Password:</span><input type='password' required />
-          <button type='submit'>Submit</button>
-        </form>
-        {!this.props.children || this.props.children}
-      </div>
-    );
-  }
-}
+  return (
+    <div>
+      <h1>Login Page</h1>
+      <form onSubmit={(e) => {
+        e.preventDefault();
+        router.push({
+          pathname: '/main/sub1',
+          state: {
+            credentials: { user: u.value, pass: p.value }
+          }
+        });
+      }}>
+        <span>Username:</span>
+        <input type='text' ref={(node) => {
+          u = node;
+        }} required
+        />
+        <span>Password:</span>
+        <input type='password' ref={(node) => {
+          p = node;
+        }} required
+        />
+        <button type='submit'>Submit</button>
+      </form>
+      {!children || children}
+    </div>
+  );
+};
 
 export default withRouter(Login);
+
