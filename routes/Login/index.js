@@ -12,7 +12,10 @@ const Login = ({ router, children }) => {
         router.push({
           pathname: '/main/sub1',
           state: {
-            credentials: { user: u.value, pass: p.value }
+            credentials: {
+              user: u.value,
+              pass: p.value
+            }
           }
         });
       }}>
